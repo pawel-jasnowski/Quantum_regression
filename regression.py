@@ -225,8 +225,19 @@ pred.describe()
 
 train_target.describe()
 
-# In[ ]:
+# In[34]:
 
 
+type(test_predictions)
 
+# In[42]:
+
+
+test_target = pd.DataFrame(test_predictions)
+test_target
+
+# In[43]:
+
+
+test_target.to_csv('target_for_traning', header=None)
 
