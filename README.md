@@ -3,7 +3,7 @@
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
-* [Setup nad running](#setup)
+* [Setup nad running](#setup-and-running)
 
 ## General info
 
