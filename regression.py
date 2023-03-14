@@ -3,12 +3,11 @@
 
 # #Import modules
 
-# In[2]:
+# In[1]:
 
 
 import pandas as pd
 import numpy as np
-import sweetviz as sv
 
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
@@ -21,84 +20,60 @@ import plotly.graph_objects as go
 
 # #Loading data / EDA / Data cleaning / Standarize
 
-# In[3]:
+# In[2]:
 
 
 raw_train_data = pd.read_csv('quantum/internship_train.csv')
 raw_test_data = pd.read_csv('quantum/internship_hidden_test.csv')
 
-# In[4]:
+# In[3]:
 
 
 train_data = raw_train_data.copy()
 test_data = raw_test_data.copy()
 
-# In[5]:
+# In[4]:
 
 
 print(len(train_data))
 print(len(test_data))
 
-# In[6]:
+# In[5]:
 
 
 train_data.tail()
 
-# In[7]:
+# In[6]:
 
 
 train_data.isnull().sum()
 
-# In[12]:
-
-
-# my_report = sv.analyze(train_data)
-
-
-# In[8]:
-
-
-# my_report.show_html('my_report.html', open_browser=True)
-
-
-# In[13]:
+# In[7]:
 
 
 train_data.describe()
 
-# In[11]:
+# In[8]:
 
 
 train_data.info()
 
-# In[11]:
-
-
-# compare_report = sv.compare([train_data, 'Train'], [test_data, 'Test'], 'target')
-
-
-# In[12]:
-
-
-# compare_report.show_html('Compare_report.html')
-
-
-# In[14]:
+# In[9]:
 
 
 train_data.keys()
 
-# In[15]:
+# In[10]:
 
 
 train_target = train_data.pop('target')
 
-# In[16]:
+# In[11]:
 
 
 train_target.head()
 
-# In[17]:
+# In[12]:
 
 
 train_stats = train_data.describe()
@@ -106,25 +81,25 @@ train_stats = train_stats.transpose()
 train_stats
 
 
-# In[18]:
+# In[13]:
 
 
-def norm(x):
+def norm(x):  # normalization
     return (x - train_stats['mean']) / train_stats['std']
 
 
-# In[19]:
+# In[14]:
 
 
 normed_train_data = norm(train_data)
 normed_test_data = norm(test_data)
 
-# In[20]:
+# In[15]:
 
 
 normed_test_data.head()
 
-# In[21]:
+# In[16]:
 
 
 normed_train_data.values
@@ -133,7 +108,7 @@ normed_test_data.values
 
 # #Model Building
 
-# In[22]:
+# In[17]:
 
 
 def build_model():
@@ -149,37 +124,37 @@ def build_model():
     return model
 
 
-# In[23]:
+# In[18]:
 
 
 model = build_model()
 model.summary()
 
-# In[24]:
+# In[19]:
 
 
 filepath = 'best_model_weights.hdf5'
 checkpoint = ModelCheckpoint(filepath=filepath, monitor='mse', save_best_only=True, verbose=1)
 es = EarlyStopping(monitor='mse', mode='min', verbose=1, patience=5)
 
-# In[25]:
+# In[ ]:
 
 
 history = model.fit(normed_train_data, train_target, epochs=150, validation_split=0.2, verbose=1, batch_size=32,
                     callbacks=[checkpoint, es])
 
-# In[26]:
+# In[ ]:
 
 
 metrics = pd.DataFrame(history.history)
 
-# In[28]:
+# In[ ]:
 
 
 metrics.head(10)
 
 
-# In[29]:
+# In[ ]:
 
 
 def plot_hist(metrics):
@@ -204,39 +179,39 @@ plot_hist(metrics)
 
 # #Prediction
 
-# In[30]:
+# In[ ]:
 
 
 test_predictions = model.predict(normed_test_data)
 
-# In[31]:
+# In[ ]:
 
 
 test_predictions
 
-# In[32]:
+# In[ ]:
 
 
 pred = pd.DataFrame(test_predictions, columns=['predictions'])
 pred.describe()
 
-# In[33]:
+# In[ ]:
 
 
 train_target.describe()
 
-# In[34]:
+# In[ ]:
 
 
 type(test_predictions)
 
-# In[42]:
+# In[ ]:
 
 
 test_target = pd.DataFrame(test_predictions)
 test_target
 
-# In[43]:
+# In[ ]:
 
 
 test_target.to_csv('target_for_traning', header=None)
