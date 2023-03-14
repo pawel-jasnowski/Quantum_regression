@@ -20,7 +20,7 @@ Task is:
   - Numpy
   - Matplotlib
   
- ## Setup and runnig
+ ## Setup
  
  - Start new project in Python 3.0
  - Get virtual env
