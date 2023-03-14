@@ -3,11 +3,13 @@
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
-* [Setup nad running](#setup)
+* [Setup](#setup)
 
 ## General info
 
-You have a dataset (internship_train.csv) that contains 53 anonymized features and a target column. Your task is to build model that predicts a target based on the proposed features. Please provide predictions for internship_hidden_test.csv file. Target metric is RMSE. The main goal is to provide github repository that contains:
+Task is:
+
+"You have a dataset (internship_train.csv in quantum folder) that contains 53 anonymized features and a target column. Your task is to build model that predicts a target based on the proposed features. Please provide predictions for internship_hidden_test.csv file. Target metric is RMSE"
 
 ## Technologies
   
@@ -17,10 +19,15 @@ You have a dataset (internship_train.csv) that contains 53 anonymized features a
   - Pandas 
   - Numpy
   - Matplotlib
-  - Sweetviz 
   
- ## Setup and runnig
+ ## Setup
  
- - 
+ - Start new project in Python 3.0
+ - Get virtual env
+ - Install modules from requirements.txt
+ - Open Jupyter Notebook
+ - Play around
+ 
+ feel free to contact me about that project at pawel.jasnowski@gmail.com 
 
 
